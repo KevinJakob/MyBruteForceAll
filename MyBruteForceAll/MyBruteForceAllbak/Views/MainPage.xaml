@@ -5,52 +5,39 @@
              x:Class="MyBruteForceAll.MainPage">
 
     <ScrollView>
-        <Grid>
+        <StackLayout Margin="5,0,5,0" VerticalOptions="FillAndExpand">
+            <TableView IsEnabled="{Binding IsEditableStartButton}" VerticalOptions="FillAndExpand" Margin="5,0,0,0" HeightRequest="920">
+                <TableView.Root>
+                    <TableSection Title="Passwort eingabe:">
+                        <EntryCell Text="{Binding EPasswort}" IsEnabled="{Binding IsEditableStartButton}" Label="Zu findendes Passwort eingeben:"></EntryCell>
+                    </TableSection>
+                    <TableSection Title="Zeichen testen:">
+                        <SwitchCell Text="a-z" OnChanged="SwitchCellLower_OnChanged"/>
+                        <SwitchCell Text="A-Z" OnChanged="SwitchCellUpper_OnChanged"/>
+                        <SwitchCell Text="0-9" OnChanged="SwitchCellNumber_OnChanged"/>
+                        <SwitchCell Text="Sonderzeichen" OnChanged="SwitchCellSpecial_OnChanged"/>
+                    </TableSection>
+                    <TableSection Title="Config">
+                        <EntryCell Text="{Binding MinZeichenAnzahl}" IsEnabled="{Binding IsEditableStartButton}" Label="Zeichenanzahl minimun"></EntryCell>
+                        <EntryCell Text="{Binding MaxZeichenAnzahl}" IsEnabled="{Binding IsEditableStartButton}" Label="Zeichenanzahl maximum"></EntryCell>
+                        <EntryCell Text="{Binding AktRhythm}" IsEnabled="{Binding IsEditableStartButton}" Label="Status Aktualisierungsrhythmus"></EntryCell>
+                    </TableSection>
+                    <TableSection Title="Status">
+                        <TextCell Text="Gerade wird geprüft:" Detail="{Binding GeradeTestet}" DetailColor="Black"/>
+                        <TextCell Text="Versuche:" Detail="{Binding Versuche}" DetailColor="Black"/>
+                        <TextCell Text="Verstrichene Zeit:" Detail="{Binding VerstricheneZeit}" DetailColor="Black"/>
+                        <TextCell Text="Gefundenes Passwort:" Detail="{Binding GefundenesPasswort}" DetailColor="Black"/>
+                        <TextCell Text="Benötigte Zeit:" Detail="{Binding Zeit}" DetailColor="Black"/>
+                        <TextCell Text="Insgesamt benötigte Versuche:" Detail="{Binding AlleVersuche}" DetailColor="Black"/>
+                    </TableSection>
+                </TableView.Root>
+            </TableView>
+            <Button Grid.Row="1" Text="Starte Brute Force Angriff" Clicked="Button_Clicked" IsEnabled="{Binding IsEditableStartButton}" Margin="5,10,5,5"/>
+            <Button Grid.Row="1" Text="Reset" Clicked="ButtonReset_Click" IsEnabled="{Binding IsEditableResetButton}" Margin="5,5,5,5"/>
+            <Button Grid.Row="1" Text="Stop Progress"  Clicked="ButtonStop_Click" IsEnabled="{Binding IsEditableStopButton}" Margin="5,5,5,5"/>
+            <Button Grid.Row="1" Text="Continue Progress"  IsEnabled="{Binding IsEditableContinueButton}" Clicked="Button_Click" Margin="5,5,5,5"/>
             
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            
-            <StackLayout Grid.Column="0" Margin="5,0,5,0">
-
-                <Label Text="Zu findendes Passwort eingeben:" Margin="0,0,0,5" FontSize="14" FontAttributes="Bold"/>
-                <Entry Text="{Binding EPasswort}"  IsEnabled="{Binding IsEditableStartButton}" />
-                <Label Text="Zeichen testen:" Margin="0,10,0,4" FontSize="14" FontAttributes="Bold" />
-                <Switch IsToggled="{Binding WithLowerCase}" Margin="0,1,0,1" IsEnabled="{Binding IsEditableStartButton}" />
-                <Switch IsToggled="{Binding WithUpperCase}" Margin="0,1,0,1" IsEnabled="{Binding IsEditableStartButton}" />
-                <Switch IsToggled="{Binding WithNumbers}"  Margin="0,1,0,1" IsEnabled="{Binding IsEditableStartButton}" />
-                <Switch IsToggled="{Binding WithSpecialChars}"  Margin="0,1,0,1" IsEnabled="{Binding IsEditableStartButton}" />
-                <Label Text="Zeichenanzahl minimum:" FontSize="14" FontAttributes="Bold" Margin="0,10,0,5"/>
-                <Entry Text="{Binding MinZeichenAnzahl}"  IsEnabled="{Binding IsEditableStartButton}" />
-                <Label Text="Zeichenanzahl maximum:" FontSize="14" FontAttributes="Bold" Margin="0,5,0,5"/>
-                <Entry Text="{Binding MaxZeichenAnzahl}"  IsEnabled="{Binding IsEditableStartButton}" />
-                <Label Text="Status Aktualisierungsrhythmus:" FontSize="14" FontAttributes="Bold" Margin="0,5,0,5"/>
-                <Entry Text="{Binding AktRhythm}"  IsEnabled="{Binding IsEditableStartButton}" />
-                <Label Text="Status:" FontSize="14" FontAttributes="Bold" Margin="0,0,0,5"/>
-                <Label Text="Gerade wird geprüft:" />
-                <Label Text="{Binding GeradeTestet}"  BackgroundColor="#eee" Margin="0,0,0,5"/>
-                <Label Text="Versuche:" />
-                <Label Text="{Binding Versuche}"  BackgroundColor="#eee"  Margin="0,0,0,5"/>
-                <Label Text="Verstrichene Zeit:" />
-                <Label Text="{Binding VerstricheneZeit}"  BackgroundColor="#eee" Margin="0,0,0,5"/>
-                <Label Text="Gefundenes Passwort:" FontSize="14" FontAttributes="Bold" Margin="0,10,0,0" />
-                <Label Text="{Binding GefundenesPasswort}"  BackgroundColor="#eee"   />
-                <Label Text="Benötigte Zeit:" FontSize="14" FontAttributes="Bold" Margin="0,10,0,0" />
-                <Label Text="{Binding Zeit}"  BackgroundColor="#eee"   />
-                <Label Text="Insgesamt benötigte Versuche:" FontSize="14" FontAttributes="Bold" Margin="0,10,0,0" />
-                <Label Text="{Binding AlleVersuche}"  BackgroundColor="#eee" />
-                <Button Text="Starte Brute Force Angriff" Clicked="Button_Clicked" IsEnabled="{Binding IsEditableStartButton}" Margin="5,10,5,5"/>
-                <Button Text="Reset" Clicked="ButtonReset_Click" IsEnabled="{Binding IsEditableResetButton}" Margin="5,5,5,5"/>
-                <Button Text="Stop Progress"  Clicked="ButtonStop_Click" IsEnabled="{Binding IsEditableStopButton}" Margin="5,5,5,5"/>
-                <Button Text="Continue Progress"  IsEnabled="{Binding IsEditableContinueButton}" Clicked="Button_Click" Margin="5,5,5,5"/>
-
-            </StackLayout>
-
-        </Grid>
+        </StackLayout>
     </ScrollView>
 
 

@@ -37,5 +37,25 @@ namespace MyBruteForceAll
         {
             _vm.ProgressContinue();
         }
+
+        private void SwitchCellUpper_OnChanged(object sender, ToggledEventArgs e)
+        {
+            _vm.UpperCase();
+        }
+
+        private void SwitchCellLower_OnChanged(object sender, ToggledEventArgs e)
+        {
+            _vm.LowerCase(); 
+        }
+
+        private void SwitchCellNumber_OnChanged(object sender, ToggledEventArgs e)
+        {
+            _vm.NumberCase(); 
+        }
+
+        private void SwitchCellSpecial_OnChanged(object sender, ToggledEventArgs e)
+        {
+            _vm.SpecialCase();
+        }
     }
 }

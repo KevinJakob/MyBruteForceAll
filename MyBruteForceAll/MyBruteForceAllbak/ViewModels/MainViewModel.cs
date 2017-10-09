@@ -272,10 +272,10 @@ namespace BruteForceGui.ViewModels
             IsEditableResetButton = false;
             IsEditableStopButton = false;
             IsEditableContinueButton = false;
-            WithLowerCase = true;
-            WithNumbers = true;
-            WithSpecialChars = true;
-            WithUpperCase = true;
+            WithLowerCase = false;
+            WithNumbers = false;
+            WithSpecialChars = false;
+            WithUpperCase = false;
             MinZeichenAnzahl = 1;
             MaxZeichenAnzahl = 64;
             AktRhythm = 100000;
@@ -437,6 +437,54 @@ namespace BruteForceGui.ViewModels
                     a++;
                 });
                 t.Start();
+            }
+        }
+
+        public void LowerCase()
+        {
+            if (WithLowerCase == false)
+            {
+                WithLowerCase = true;
+            }
+            else if (WithLowerCase == true)
+            {
+                WithLowerCase = false;
+            }
+        }
+
+        public void UpperCase()
+        {
+            if (WithUpperCase == false)
+            {
+                WithUpperCase = true;
+            }
+            else if (WithUpperCase == true)
+            {
+                WithUpperCase = false;
+            }
+        }
+
+        public void NumberCase()
+        {
+            if (WithNumbers == false)
+            {
+                WithNumbers = true;
+            }
+            else if (WithNumbers == true)
+            {
+                WithNumbers = false;
+            }
+        }
+
+        public void SpecialCase()
+        {
+            if (WithSpecialChars == false)
+            {
+                WithSpecialChars = true;
+            }
+            else if (WithSpecialChars == true)
+            {
+                WithSpecialChars = false;
             }
         }
 
